@@ -1,0 +1,22 @@
+project_id = "bctedgvpkaccjbnnktqs"
+
+[functions.create-pix-deposit]
+verify_jwt = false
+
+[functions.skalepay-webhook]
+verify_jwt = false
+
+[functions.play-start]
+verify_jwt = false
+
+[functions.play-step]
+verify_jwt = false
+
+[functions.play-cashout]
+verify_jwt = false
+
+[functions.request-withdrawal]
+verify_jwt = false
+
+[functions.admin-withdrawal]
+verify_jwt = false

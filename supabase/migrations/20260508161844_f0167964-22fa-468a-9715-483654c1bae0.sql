@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "deposits_public_insert" ON public.deposits;

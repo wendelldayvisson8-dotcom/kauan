@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 45% 5%;
+    --foreground: 200 40% 96%;
+
+    --card: 220 40% 8%;
+    --card-foreground: 200 40% 96%;
+
+    --popover: 220 40% 8%;
+    --popover-foreground: 200 40% 96%;
+
+    --primary: 195 90% 60%;
+    --primary-foreground: 220 50% 6%;
+    --primary-glow: 190 100% 70%;
+
+    --secondary: 220 35% 14%;
+    --secondary-foreground: 200 40% 96%;
+
+    --muted: 220 30% 12%;
+    --muted-foreground: 210 20% 65%;
+
+    --accent: 195 90% 60%;
+    --accent-foreground: 220 50% 6%;
+
+    --success: 160 84% 50%;
+    --success-foreground: 220 50% 6%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 200 50% 25% / 0.25;
+    --input: 220 35% 14%;
+    --ring: 195 90% 60%;
+
+    --radius: 1rem;
+
+    --gradient-bg: radial-gradient(ellipse at top, hsl(210 80% 18% / 0.6), transparent 60%), radial-gradient(ellipse at bottom, hsl(195 90% 30% / 0.25), transparent 60%), hsl(220 45% 5%);
+    --gradient-ice: linear-gradient(135deg, hsl(195 90% 70% / 0.25), hsl(210 80% 50% / 0.1));
+    --gradient-ice-strong: linear-gradient(135deg, hsl(195 90% 75% / 0.45), hsl(210 90% 55% / 0.25));
+    --gradient-broken: linear-gradient(135deg, hsl(0 80% 55% / 0.4), hsl(15 70% 35% / 0.2));
+    --gradient-safe: linear-gradient(135deg, hsl(160 84% 55% / 0.55), hsl(180 80% 45% / 0.25));
+
+    --shadow-glow: 0 0 40px hsl(195 90% 60% / 0.35);
+    --shadow-ice: 0 8px 32px hsl(210 80% 10% / 0.6), inset 0 1px 0 hsl(195 100% 90% / 0.2);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply text-foreground;
+    background: var(--gradient-bg);
+    min-height: 100vh;
+    font-feature-settings: "ss01", "cv11";
+  }
+}
+
+@layer components {
+  .glass {
+    background: var(--gradient-ice);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(195 90% 75% / 0.18);
+    box-shadow: var(--shadow-ice);
+  }
+  .glass-strong {
+    background: var(--gradient-ice-strong);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid hsl(195 90% 80% / 0.3);
+    box-shadow: var(--shadow-ice);
+  }
+  .ice-block {
+    @apply glass relative overflow-hidden cursor-pointer transition-all;
+    transition: var(--transition-smooth);
+  }
+  .ice-block::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(115deg, transparent 35%, hsl(195 100% 95% / 0.18) 50%, transparent 65%);
+    pointer-events: none;
+  }
+  .ice-block:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.02);
+    border-color: hsl(195 100% 80% / 0.6);
+    box-shadow: var(--shadow-glow), var(--shadow-ice);
+  }
+  .ice-block.safe { background: var(--gradient-safe); border-color: hsl(160 84% 60% / 0.6); }
+  .ice-block.broken { background: var(--gradient-broken); border-color: hsl(0 80% 60% / 0.6); }
+  .text-glow { text-shadow: 0 0 24px hsl(195 100% 70% / 0.6); }
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%,60% { transform: translateX(-8px); }
+  40%,80% { transform: translateX(8px); }
+}
+.animate-shake { animation: shake 0.4s ease-in-out; }
+
+@keyframes pulse-glow {
+  0%,100% { box-shadow: 0 0 20px hsl(195 90% 60% / 0.4); }
+  50% { box-shadow: 0 0 40px hsl(195 90% 60% / 0.8); }
+}
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+@keyframes penguin-hop {
+  0%   { transform: translate(-50%, 0) scale(1, 1); }
+  20%  { transform: translate(-50%, 4px) scale(1.15, 0.82); }
+  55%  { transform: translate(-50%, -42px) scale(0.92, 1.12) rotate(-6deg); }
+  80%  { transform: translate(-50%, -8px) scale(1.05, 0.95); }
+  100% { transform: translate(-50%, 0) scale(1, 1); }
+}
+.animate-penguin-hop { animation: penguin-hop 0.55s cubic-bezier(0.34, 1.2, 0.4, 1); }
+
+@keyframes pengu-idle {
+  0%,100% { transform: translate(-50%, 0); }
+  50%     { transform: translate(-50%, -5px); }
+}
+.animate-pengu-idle { animation: pengu-idle 2.2s ease-in-out infinite; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in { animation: fade-in 0.25s ease-out; }
